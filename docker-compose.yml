@@ -1,0 +1,23 @@
+version: '3'
+services:
+    database:
+        image: postgres
+        env_file:
+            - .env
+        volumes:
+            - postgres-db:/var/lib/postgresql/data
+    api:
+        build: ./backend
+        ports:
+            - 8000:8000
+        env_file:
+            - .env
+    client:
+        build: ./frontend
+        ports:
+            - 3000:3000
+        env_file:
+            - .env
+
+volumes:
+    postgres-db:
