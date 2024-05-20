@@ -1,4 +1,4 @@
-version: '3'
+version: '3.8'
 services:
     database:
         image: postgres
@@ -13,9 +13,13 @@ services:
         env_file:
             - .env
     client:
-        build: ./frontend
+        build:
+            context: ./frontend
+            args:
+                - VITE_GOOGLE_CLIENT_ID=${VITE_GOOGLE_CLIENT_ID}
+                - VITE_API_DOMAIN=${VITE_API_DOMAIN}
         ports:
-            - 3000:3000
+            - 8080:8080
         env_file:
             - .env
 
